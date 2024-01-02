@@ -5,8 +5,10 @@
   "datePublished": "2024-01-02T00:00:00",
   "author": "MonkeyPaste LLC",
   "guid": "04c4d099-530e-432d-b107-3b0696b980cf",
-  "projectUrl": "https://www.monkeypaste.com",
-  "iconUri": "icon.png",
+  "projectUrl": "https://github.com/monkeypaste/FileConverter",
+  "packageUrl": "https://github.com/monkeypaste/FileConverter/releases/download/v1.0.0/FileConverter.zip",
+  "readmeUrl": "https://github.com/monkeypaste/FileConverter/blob/4daa79aed0b41efd838d0fe54b4ab8ccfe84c8b4/README.md",
+  "iconUri": "https://github.com/monkeypaste/FileConverter/blob/4daa79aed0b41efd838d0fe54b4ab8ccfe84c8b4/icon.png",
   "tags": "Core,Text,Image,File,Converter,File to text,File to image",
   "packageType": "Dll",
   "analyzer": {

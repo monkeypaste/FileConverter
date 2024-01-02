@@ -1,7 +1,7 @@
 # File Converter
 A bare-bones utility for converting files into text or image clips in MonkeyPaste
 
-<p style="text-align: center;"><img style="width: 70%" src="icon.png" /></p>
+<p style="text-align: center;"><img style="width: 25%" src="icon.png" /></p>
 
 ## Requirements
 - An installation of [MonkeyPaste](https://www.monkeypaste.com/download) 
