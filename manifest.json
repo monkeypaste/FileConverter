@@ -1,0 +1,81 @@
+{
+  "title": "File Converter",
+  "description": "Allows files to be translated into images or text content types",
+  "version": "1.0",
+  "datePublished": "2024-01-02T00:00:00",
+  "author": "MonkeyPaste LLC",
+  "guid": "04c4d099-530e-432d-b107-3b0696b980cf",
+  "projectUrl": "https://www.monkeypaste.com",
+  "iconUri": "icon.png",
+  "tags": "Core,Text,Image,File,Converter,File to text,File to image",
+  "packageType": "Dll",
+  "analyzer": {
+    "inputType": {
+      "file": true
+    },
+    "outputType": {
+      "image": true,
+      "text": true
+    },
+    "parameters": [
+      {
+        "label": "File to convert",
+        "description": "",
+        "controlType": "TextBox",
+        "unitType": "RawDataContentQuery",
+        "isVisible": false,
+        "paramId": 1,
+        "values": [
+          {
+            "value": "{ItemData}"
+          }
+        ]
+      },
+      {
+        "label": "Output Type",
+        "description": "Only .png or .txt right now",
+        "controlType": "ComboBox",
+        "unitType": "PlainText",
+        "isRequired": true,
+        "paramId": 2,
+        "values": [
+          {
+            "label": "Text",
+            "value": "Text",
+            "isDefault": true
+          },
+          {
+            "label": "Image",
+            "value": "Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "guid": "2159a492-cdc5-429d-bf26-08c478f87e52",
+        "label": "Convert to Text",
+        "iconUri": "text.png",
+        "description": "Attempts to convert provided file to plain text",
+        "values": [
+          {
+            "paramId": 2,
+            "value": "Text"
+          }
+        ]
+      },
+      {
+        "guid": "c24df3c2-5316-45e2-aac4-ffccdf8a8460",
+        "iconUri": "image.png",
+        "label": "Convert to Image",
+        "description": "Attempts to convert provided file to in-memory image",
+        "values": [
+          {
+            "paramId": 2,
+            "value": "Image"
+          }
+        ]
+      }
+    ]
+  }
+}
