@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Platforms>$(DefaultPlatforms)</Platforms>
+    <LangVersion>$(DefaultLangVersion)</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +13,14 @@
     <None Remove="README.md" />
     <None Remove="text.png" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Include="Resources\Resources.*.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\manifest.*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -36,7 +44,23 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\MonkeyPaste.Common.Plugin\MonkeyPaste.Common.Plugin.csproj" />
-    <ProjectReference Include="..\..\Common\MonkeyPaste.Common\MonkeyPaste.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>FileConverter</CustomToolNamespace>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(PushPlugins)' == 'True'">
     <ItemGroup>
