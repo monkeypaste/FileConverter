@@ -12,46 +12,41 @@ namespace FileConverter {
             if (!File.Exists(path)) {
                 return null;
             }
-            string target_type = req.GetParamValue<string>(TARGET_TYPE_PARAM_ID);
-            string target_format;
-            object target_data = null;
-            if (target_type == "Image") {
-                target_format = MpPortableDataFormats.Image;
-                if (ReadBytesFromFile(path) is byte[] bytes &&
-                    bytes.Length > 0) {
-                    target_data = Convert.ToBase64String(bytes);
-                }
-            } else {
-                target_format = MpPortableDataFormats.Text;
-                target_data = ReadTextFromFile(path);
-            }
-            if (target_data == null) {
-                return null;
-            }
 
-            return new MpAnalyzerPluginResponseFormat() {
-                dataObjectLookup = new Dictionary<string, object> { { target_format, target_data } }
-            };
+            try {
+                object target_data = default;
+                string target_type = req.GetParamValue<string>(TARGET_TYPE_PARAM_ID);
+                string target_format;
+                if (target_type == "Image") {
+                    target_format = MpPortableDataFormats.Image;
+                    if (ReadBytesFromFile(path) is byte[] bytes &&
+                        bytes.Length > 0) {
+                        target_data = Convert.ToBase64String(bytes);
+                    }
+                } else {
+                    target_format = MpPortableDataFormats.Text;
+                    target_data = ReadTextFromFile(path);
+                }
+
+                return new MpAnalyzerPluginResponseFormat() {
+                    dataObjectLookup = new Dictionary<string, object> { { target_format, target_data } }
+                };
+            } catch(Exception ex) {
+                return new MpAnalyzerPluginResponseFormat() {
+                    errorMessage = ex.ToString()
+                };
+            }
         }
 
         private byte[] ReadBytesFromFile(string filePath) {
-            if (!File.Exists(filePath)) {
-                return null;
-            }
-            try {
-                using (var fs = new FileStream(filePath, FileMode.Open)) {
-                    int c;
-                    var bytes = new List<byte>();
+            using (var fs = new FileStream(filePath, FileMode.Open)) {
+                int c;
+                var bytes = new List<byte>();
 
-                    while ((c = fs.ReadByte()) != -1) {
-                        bytes.Add((byte)c);
-                    }
-                    return bytes.ToArray();
+                while ((c = fs.ReadByte()) != -1) {
+                    bytes.Add((byte)c);
                 }
-            }
-            catch (Exception ex) {
-                MpConsole.WriteTraceLine("MpHelpers.ReadTextFromFile error for filePath: " + filePath + ex.ToString());
-                return null;
+                return bytes.ToArray();
             }
         }
         private string ReadTextFromFile(string filePath) {
