@@ -2,17 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Platforms>$(DefaultPlatforms)</Platforms>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
     <LangVersion>$(DefaultLangVersion)</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="icon.png" />
-    <None Remove="image.png" />
-    <None Remove="manifest.json" />
-    <None Remove="README.md" />
-    <None Remove="text.png" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Resources.*.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -62,13 +55,4 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(PushPlugins)' == 'True'">
-    <ItemGroup>
-      <BuildFiles Include="$(TargetDir)\*.*" />
-      <ProjectFiles Include="$(ProjectDir)\*.*" />
-    </ItemGroup>
-    <Copy SourceFiles="@(BuildFiles)" DestinationFolder="$(PluginTargetDir)\$(ProjectName)\" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="true" ContinueOnError="true" />
-    <Copy SourceFiles="@(ProjectFiles)" DestinationFolder="$(PluginTargetDir)\$(ProjectName)\" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="true" ContinueOnError="true" />
-
-  </Target>
 </Project>
